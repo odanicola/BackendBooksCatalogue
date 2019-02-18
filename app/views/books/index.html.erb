@@ -1,0 +1,76 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <% title "All Books" %>
+          <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %>">
+                <% if value.kind_of?(Array) %>
+                  <ul>
+                    <% value.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <%= value %>
+                <% end %>
+              </div>
+          <% end %>
+          <% if @books.blank? %>
+            <p>There are not any books currently in the system.</p>
+            <p>
+              <%= link_to new_book_path, class: "btn btn-success" do %>
+                <%= fa_icon "plus", text: "Add Book"%>
+              <% end %>
+            </p>
+          <% else %>
+            <p>These are the current books in our system.</p>
+            <p>
+              <%= link_to new_book_path, class: "btn btn-success" do %>
+                <%= fa_icon "plus", text: "Add Book"%>
+              <% end %>
+            </p>
+            <div class="table-responsive">
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <td>No</td>
+                    <td>Book Name</td>
+                    <td>Price</td>
+                    <td>Description</td>
+                    <td>Action</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% i = 1 %>
+                  <% @books.each do |c| %>
+                    <tr>
+                      <td><%= i %></td>
+                      <td><%= c.title %></td>
+                      <td><%= 'Rp. ' + number_to_currency(c.price, unit: "", delimiter: ".", separator: ",", precision: 2) %></td>
+                      <td><%= c.description %></td>
+                      <td>
+                          <%= link_to edit_book_path(c), class: 'btn btn-warning', title: 'Edit' do %>
+                            <%= fa_icon 'edit' %>
+                          <% end %>
+                          <%= link_to book_path(c), class: 'btn btn-info', title: 'Detail' do %>
+                            <%= fa_icon 'list' %>
+                          <% end %>
+                          <%= link_to book_path(c), class: 'btn btn-danger', title: 'Delete', method: :delete, data: { confirm: 'Are you sure?'} do %>
+                            <%= fa_icon 'trash' %>
+                          <% end %>
+                      </td>
+                    </tr>
+                  <% i += 1 %>
+                  <% end %>
+                </tbody>
+              </table>
+            </div>
+
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

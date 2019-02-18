@@ -1,0 +1,52 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-md-12">
+              <% title @book.title %>
+              <% meta_tag :description, @book.description %>
+
+              <% flash.each do |key, value| %>
+                  <div class="alert alert-<%= key %>">
+                    <% if value.kind_of?(Array) %>
+                      <ul>
+                        <% value.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    <% else %>
+                      <%= value %>
+                    <% end %>
+                  </div>
+              <% end %>
+              <%= link_to books_path, class: "btn btn-primary", style: "margin-bottom:20px;" do %>
+                  <%= fa_icon "arrow-left", text: "Back" %>
+              <% end %>
+            </div>
+            <div class="col-md-4">
+              <img src="https://via.placeholder.com/300x400" alt="" class="img-responsive">
+            </div>
+            <div class="col-md-8 table-responsive">
+              <table class="table table-striped" width="100%">
+                <tr>
+                  <td width="40%"><strong>Book Name</strong></td>
+                  <td width="60%"><%= @book.title %></td>
+                </tr>
+                <tr>
+                  <td width="40%"><strong>Price</strong> </td>
+                  <td width="60%"><%= 'Rp. ' + number_to_currency(@book.price, unit: "", delimiter: ".", separator: ",", precision: 2) %></td>
+                </tr>
+                <tr>
+                  <td width="40%"><strong>Description</strong> </td>
+                  <td width="60%"><%= @book.description %></td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

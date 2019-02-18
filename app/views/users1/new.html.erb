@@ -1,0 +1,60 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h3>New User</h3>
+        <hr>
+        <% if @user.errors.any? %>
+          <div class="alert alert-danger" id="error_explanation">
+            <h2>
+              <%= pluralize(@user.errors.count, "error") %> prohibited from being logged:
+            </h2>
+            <ul>
+              <% @user.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% else %>
+          <% flash.each do |key, value| %>
+              <div class="alert alert-<%= key %>">
+                <% if value.kind_of?(Array) %>
+                  <ul>
+                    <% value.each do |msg| %>
+                      <li><%= msg %></li>
+                    <% end %>
+                  </ul>
+                <% else %>
+                  <%= value %>
+                <% end %>
+              </div>
+          <% end %>
+        <% end %>
+
+        <%= form_with model: @user, local:true do |form| %>
+        <div class="row">
+          <div class="col-md-6">
+             <div class="form-group">
+               <%= form.label :email %>
+               <%= form.text_field :email, class: 'form-control', placeholder: 'Email' %>
+             </div>
+             <div class="form-group">
+               <%= form.label :password %>
+               <%= form.password_field :password, class: 'form-control', placeholder: 'Password' %>
+             </div>
+             <div class="form-group">
+               <%= form.label :password_confirmation %>
+               <%= form.password_field :password_confirmation, class: 'form-control', placeholder: 'Confirm Password' %>
+             </div>
+             <div class="form-group">
+               <%= button_tag(type: 'submit', class: 'btn btn-success') do %>
+                 <%= fa_icon 'paper-plane', text: 'Register' %>
+               <% end %>
+             </div>
+          </div>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</section>

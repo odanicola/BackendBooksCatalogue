@@ -1,0 +1,58 @@
+<div class="wrapper wrapper-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-content">
+          <div class="row">
+            <div class="col-md-12">
+              <% title @subject.nama %>
+              <% meta_tag :description, @subject.description %>
+
+              <% flash.each do |key, value| %>
+                  <div class="alert alert-<%= key %>">
+                    <% if value.kind_of?(Array) %>
+                      <ul>
+                        <% value.each do |msg| %>
+                          <li><%= msg %></li>
+                        <% end %>
+                      </ul>
+                    <% else %>
+                      <%= value %>
+                    <% end %>
+                  </div>
+              <% end %>
+              <%= link_to subjects_path, class: "btn btn-primary", style: "margin-bottom:20px;" do %>
+                  <%= fa_icon "arrow-left", text: "Back" %>
+              <% end %>
+            </div>
+            <div class="col-md-8">
+              <table class="table table-border" width="100%">
+                <tr>
+                  <td width="40%"><strong>Subject Name</strong></td>
+                  <td width="60%"><%= @subject.nama %></td>
+                </tr>
+                <tr>
+                  <td width="40%"><strong>Description</strong> </td>
+                  <td width="60%"><%= @subject.description %></td>
+                </tr>
+                <tr>
+                  <td width="40%"><strong>Status</strong> </td>
+                  <td width="60%">
+                    <% if @subject.status == '1' %>
+                      <%= fa_icon 'check', style: 'color:green' %>
+                    <% else %>
+                      <%= fa_icon 'close', style: 'color:red' %>
+                    <% end %>
+                  </td>
+                </tr>
+              </table>
+            </div>
+            <div class="col-md-4">
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
