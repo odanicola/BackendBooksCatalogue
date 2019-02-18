@@ -74,4 +74,4 @@ gem 'bcrypt', '~> 3.1', '>= 3.1.11'
 gem 'devise'
 
 # CORS
-# gem 'rack-cors', require: 'rack/cors'
+gem 'rack-cors', require: 'rack/cors'
